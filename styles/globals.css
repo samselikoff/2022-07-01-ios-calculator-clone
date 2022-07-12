@@ -4,4 +4,9 @@
 
 button {
   -webkit-tap-highlight-color: transparent;
+  @apply focus:outline-none;
+}
+
+body {
+  /* @apply overflow-hidden; */
 }
