@@ -8,9 +8,19 @@
 - While press, can't scroll page
 - Press doesn't trigger text highlight or spyglass
 
-# Todo:
+# Todo mentions:
+
+- Hold spacebar
 
 - touch action none
+
+- [On focus-visible](https://react-spectrum.adobe.com/blog/building-a-button-part-3.html):
+
+In the future, the :focus-visible pseudo class in CSS may be able to replace this code. However, since the spec does not say when it should apply, browsers will likely implement different heuristics, which will mean it will behave inconsistently. Until browser support improves, the useFocusVisible and useFocusRing hooks in React Aria can be used to implement focus rings that work consistently across browsers.
+
+it's because they preventDefault on mouse down and always focus programatically
+
+safari and ios don't always focus buttons on mousedown, and sometimes ios even asynchronously blurs a button after onClick is fired
 
 # Step
 
