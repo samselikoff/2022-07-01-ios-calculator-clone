@@ -1,12 +1,7 @@
-import resolveConfig from "tailwindcss/resolveConfig";
-import tailwindConfig from "../tailwind.config.js";
-import { motion, useAnimation } from "framer-motion";
-import { FocusRing } from "@react-aria/focus";
-import { useRef } from "react";
 import { useButton } from "@react-aria/button";
-
-let fullConfig = resolveConfig(tailwindConfig);
-let colors = fullConfig.theme.colors;
+import { FocusRing } from "@react-aria/focus";
+import { motion, useAnimation } from "framer-motion";
+import { useRef } from "react";
 
 export default function CalculatorPage() {
   return (
@@ -16,51 +11,41 @@ export default function CalculatorPage() {
           <Button>7</Button>
           <Button>8</Button>
           <Button>9</Button>
-          <Button>&times;</Button>
         </div>
         <div className="flex space-x-3">
           <Button>4</Button>
           <Button>5</Button>
           <Button>6</Button>
-          <Button>-</Button>
         </div>
         <div className="flex space-x-3">
           <Button>1</Button>
           <Button>2</Button>
           <Button>3</Button>
-          <Button>+</Button>
         </div>
       </div>
     </div>
   );
 }
 
-function Button({
-  onClick = () => {
-    console.log("click");
-  },
-  children,
-  ...props
-}) {
+function Button({ onClick = () => {}, children, ...props }) {
   let ref = useRef();
-  const controls = useAnimation();
-
+  let controls = useAnimation();
   let { buttonProps } = useButton({
     onPressStart: () => {
       controls.stop();
-      controls.set({ background: colors.neutral[500] });
+      controls.set({ background: "#757376" });
     },
     onPressEnd: () => {
       controls.start({
-        background: colors.neutral[700],
-        transition: { duration: 0.5, ease: "easeInOut" },
+        background: "#353336",
+        transition: { duration: 0.6 },
       });
     },
     onPress: () => {
       onClick();
       controls.start({
-        background: [null, colors.neutral[700]],
-        transition: { duration: 0.5, ease: "easeInOut" },
+        background: [null, "#353336"],
+        transition: { duration: 0.6 },
       });
     },
   });
@@ -71,7 +56,7 @@ function Button({
         {...buttonProps}
         ref={ref}
         animate={controls}
-        className="aspect-square w-full touch-none overscroll-contain rounded-full bg-neutral-700 text-[40px] text-white"
+        className="aspect-square w-full touch-none overscroll-contain rounded-full bg-[#353336] text-[40px] text-white"
         {...props}
       >
         {children}
