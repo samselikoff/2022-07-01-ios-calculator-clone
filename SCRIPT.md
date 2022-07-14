@@ -10,6 +10,17 @@
 
 # Todo mentions:
 
+- This stuff
+
+```css
+button {
+  -webkit-tap-highlight-color: transparent;
+  @apply focus:outline-none;
+}
+```
+
+- User-select: none, prob just put it on butotn but useButton applies it while tapping
+
 - Hold spacebar
 
 - touch action none
