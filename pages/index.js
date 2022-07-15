@@ -1,45 +1,39 @@
-import { motion, useAnimation } from "framer-motion";
-import resolveConfig from "tailwindcss/resolveConfig";
-import tailwindConfig from "../tailwind.config.js";
-let fullConfig = resolveConfig(tailwindConfig);
-let colors = fullConfig.theme.colors;
+import { useState } from "react";
 
-export default function Home() {
-  const controls = useAnimation();
+export default function CalculatorPage() {
+  let [nums, setNums] = useState([]);
+
+  function handleClick(num) {
+    setNums([...nums, num]);
+  }
 
   return (
-    <div className="mt-16 text-center">
-      <motion.button
-        animate={controls}
-        onClick={async () => {
-          await controls.start({
-            background: [
-              transparentize(colors.gray[300], 1),
-              transparentize(colors.gray[300], 0),
-              // transparentize(colors.violet[500], 0),
-              // transparentize(colors.violet[500], 1),
-            ],
-            transition: {
-              duration: 0.5,
-              // duration: 0.2,
-              // times: [0.3, 0.3, 0.6, 0.6],
-            },
-          });
-        }}
-        className="rounded border border-gray-300 px-3 py-2"
-      >
-        Click me
-      </motion.button>
+    <div className="mx-auto flex min-h-screen max-w-xs flex-col items-center justify-end p-6 md:justify-center">
+      <div className="ml-auto text-8xl font-extralight tabular-nums text-white">
+        {nums.length ? nums.slice(-3).join("") : 0}
+      </div>
+      <div className="mt-9 flex flex-wrap justify-between gap-4">
+        <Button onClick={() => handleClick(7)}>7</Button>
+        <Button onClick={() => handleClick(8)}>8</Button>
+        <Button onClick={() => handleClick(9)}>9</Button>
+        <Button onClick={() => handleClick(4)}>4</Button>
+        <Button onClick={() => handleClick(5)}>5</Button>
+        <Button onClick={() => handleClick(6)}>6</Button>
+        <Button onClick={() => handleClick(1)}>1</Button>
+        <Button onClick={() => handleClick(2)}>2</Button>
+        <Button onClick={() => handleClick(3)}>3</Button>
+      </div>
     </div>
   );
 }
 
-function transparentize(hexColor, opacity) {
-  var result = /^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i.exec(hexColor);
-  return result
-    ? `rgba(${parseInt(result[1], 16)} ${parseInt(result[2], 16)} ${parseInt(
-        result[3],
-        16
-      )} / ${opacity})`
-    : null;
+function Button({ onClick = () => {}, children }) {
+  return (
+    <button
+      onClick={onClick}
+      className="h-20 w-20 rounded-full bg-[#353336] text-[40px] text-white focus:outline-none focus-visible:ring focus-visible:ring-offset-2 focus-visible:ring-offset-black active:bg-[#757376]"
+    >
+      {children}
+    </button>
+  );
 }

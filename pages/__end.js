@@ -33,6 +33,7 @@ export default function CalculatorPage() {
 function Button({ onClick = () => {}, children }) {
   let ref = useRef();
   let controls = useAnimation();
+
   let { buttonProps } = useButton({
     onPressStart: () => {
       controls.stop();
