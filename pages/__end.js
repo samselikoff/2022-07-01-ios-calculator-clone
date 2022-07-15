@@ -4,29 +4,33 @@ import { motion, useAnimation } from "framer-motion";
 import { useRef, useState } from "react";
 
 export default function CalculatorPage() {
-  let [number, setNumber] = useState(0);
+  let [nums, setNums] = useState([]);
+
+  function handleClick(num) {
+    setNums([...nums, num]);
+  }
 
   return (
-    <div className="mx-auto flex min-h-screen max-w-xs flex-col items-center justify-end p-6">
-      <div className="ml-auto text-8xl font-extralight text-white">
-        {number}
+    <div className="mx-auto flex min-h-screen max-w-xs flex-col items-center justify-end p-6 md:justify-center">
+      <div className="ml-auto text-8xl font-extralight tabular-nums text-white">
+        {nums.length ? nums.slice(-3).join("") : 0}
       </div>
       <div className="mt-9 flex flex-wrap justify-between gap-4">
-        <Button onClick={() => setNumber(7)}>7</Button>
-        <Button onClick={() => setNumber(8)}>8</Button>
-        <Button onClick={() => setNumber(9)}>9</Button>
-        <Button onClick={() => setNumber(4)}>4</Button>
-        <Button onClick={() => setNumber(5)}>5</Button>
-        <Button onClick={() => setNumber(6)}>6</Button>
-        <Button onClick={() => setNumber(1)}>1</Button>
-        <Button onClick={() => setNumber(2)}>2</Button>
-        <Button onClick={() => setNumber(3)}>3</Button>
+        <Button onClick={() => handleClick(7)}>7</Button>
+        <Button onClick={() => handleClick(8)}>8</Button>
+        <Button onClick={() => handleClick(9)}>9</Button>
+        <Button onClick={() => handleClick(4)}>4</Button>
+        <Button onClick={() => handleClick(5)}>5</Button>
+        <Button onClick={() => handleClick(6)}>6</Button>
+        <Button onClick={() => handleClick(1)}>1</Button>
+        <Button onClick={() => handleClick(2)}>2</Button>
+        <Button onClick={() => handleClick(3)}>3</Button>
       </div>
     </div>
   );
 }
 
-function Button({ onClick = () => {}, children, ...props }) {
+function Button({ onClick = () => {}, children }) {
   let ref = useRef();
   let controls = useAnimation();
   let { buttonProps } = useButton({
@@ -50,13 +54,12 @@ function Button({ onClick = () => {}, children, ...props }) {
   });
 
   return (
-    <FocusRing focusRingClass="ring ring-offset-[3px] ring-offset-black">
+    <FocusRing focusRingClass="ring ring-offset-2 ring-offset-black">
       <motion.button
         {...buttonProps}
         ref={ref}
         animate={controls}
-        className="aspect-square h-20 w-20 touch-none select-none overscroll-contain rounded-full bg-[#353336] text-[40px] text-white"
-        {...props}
+        className="h-20 w-20 touch-none select-none rounded-full bg-[#353336] text-[40px] text-white focus:outline-none"
       >
         {children}
       </motion.button>

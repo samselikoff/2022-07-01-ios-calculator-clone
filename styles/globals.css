@@ -5,8 +5,3 @@
 body {
   @apply bg-black;
 }
-
-button {
-  -webkit-tap-highlight-color: transparent;
-  @apply focus:outline-none;
-}

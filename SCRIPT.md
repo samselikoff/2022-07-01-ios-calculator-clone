@@ -10,6 +10,8 @@
 
 # Todo mentions:
 
+- Quick tap doesn't show active state
+
 - This stuff
 
 ```css
@@ -20,6 +22,10 @@ button {
 ```
 
 - User-select: none, prob just put it on butotn but useButton applies it while tapping
+
+- when using active:bg-[], tab to button, hold space, tab off to cancel. Different behavior in chrome v safari
+
+- Focus-visible
 
 - Hold spacebar
 
