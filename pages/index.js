@@ -1,4 +1,7 @@
-import { useState } from "react";
+import { useButton } from "@react-aria/button";
+import { useRef, useState } from "react";
+import { FocusRing } from "@react-aria/focus";
+import { motion, useAnimation } from "framer-motion";
 
 export default function CalculatorPage() {
   let [nums, setNums] = useState([]);
@@ -28,12 +31,37 @@ export default function CalculatorPage() {
 }
 
 function Button({ onClick, children }) {
+  let controls = useAnimation();
+  let ref = useRef();
+  let { buttonProps } = useButton(
+    {
+      onPressStart: () => {
+        controls.stop();
+        controls.set({ background: "#757376" });
+      },
+      onPressEnd: () => {
+        controls.start({
+          background: "#353336",
+          transition: { duration: 0.4 },
+        });
+      },
+      onPress: onClick,
+    },
+    ref
+  );
+
   return (
-    <button
-      onClick={onClick}
-      className="h-20 w-20 rounded-full bg-[#353336] text-[40px] text-white focus:outline-none focus-visible:ring focus-visible:ring-offset-2 focus-visible:ring-offset-black active:bg-[#757376]"
-    >
-      {children}
-    </button>
+    <FocusRing focusRingClass="ring ring-offset-2 ring-offset-black">
+      <motion.button
+        animate={controls}
+        {...buttonProps}
+        style={{
+          WebkitTapHighlightColor: "transparent",
+        }}
+        className="h-20 w-20 touch-none select-none rounded-full bg-[#353336] text-[40px] text-white focus:outline-none"
+      >
+        {children}
+      </motion.button>
+    </FocusRing>
   );
 }
