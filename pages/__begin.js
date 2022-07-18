@@ -27,7 +27,7 @@ export default function CalculatorPage() {
   );
 }
 
-function Button({ onClick = () => {}, children }) {
+function Button({ onClick, children }) {
   return (
     <button
       onClick={onClick}

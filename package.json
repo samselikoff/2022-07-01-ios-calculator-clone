@@ -11,7 +11,7 @@
   "dependencies": {
     "@react-aria/button": "^3.5.1",
     "@react-aria/interactions": "^3.9.1",
-    "framer-motion": "^6.3.16",
+    "framer-motion": "^6.5.1",
     "next": "12.2.0",
     "postcss-100vh-fix": "^1.0.2",
     "react": "18.2.0",

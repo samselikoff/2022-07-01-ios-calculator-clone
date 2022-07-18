@@ -34,25 +34,28 @@ function Button({ onClick = () => {}, children }) {
   let ref = useRef();
   let controls = useAnimation();
 
-  let { buttonProps } = useButton({
-    onPressStart: () => {
-      controls.stop();
-      controls.set({ background: "#757376" });
+  let { buttonProps } = useButton(
+    {
+      onPressStart: () => {
+        controls.stop();
+        controls.set({ background: "#757376" });
+      },
+      onPressEnd: () => {
+        controls.start({
+          background: "#353336",
+          transition: { duration: 0.4 },
+        });
+      },
+      onPress: () => {
+        onClick();
+        controls.start({
+          background: [null, "#353336"],
+          transition: { duration: 0.4 },
+        });
+      },
     },
-    onPressEnd: () => {
-      controls.start({
-        background: "#353336",
-        transition: { duration: 0.4 },
-      });
-    },
-    onPress: () => {
-      onClick();
-      controls.start({
-        background: [null, "#353336"],
-        transition: { duration: 0.4 },
-      });
-    },
-  });
+    ref
+  );
 
   return (
     <FocusRing focusRingClass="ring ring-offset-2 ring-offset-black">
