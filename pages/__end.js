@@ -64,6 +64,9 @@ function Button({ onClick = () => {}, children }) {
         ref={ref}
         animate={controls}
         className="h-20 w-20 touch-none select-none rounded-full bg-[#353336] text-[40px] text-white focus:outline-none"
+        style={{
+          WebkitTapHighlightColor: "transparent",
+        }}
       >
         {children}
       </motion.button>

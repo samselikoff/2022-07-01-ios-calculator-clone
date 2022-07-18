@@ -11,7 +11,7 @@ Some weirdness:
 
 # 🟢 Step
 
-Let's fix the text selection. Easy: tw class `select-none`. Now w
+Let's fix the text selection. Easy: tw class `select-none`.
 
 # 🟢 Step
 
@@ -191,4 +191,14 @@ onPress: () => {
 
 Now to clean up we don't need this `isPressed` conditional logic anymore. SO we can remove this and add back in our starting bg color: `bg-[#353336]`.
 
-Check on desktop, mobile, keyboard. All works great!
+Check on desktop, mouse is great. Keyboard, great. Now mobile. Bit of a flicker here. One last thing we need, this is actually coming from the webkit tap highlight color css property. Since we're implementing this all our own let's set this to transparent.
+
+```jsx
+style={{
+  WebkitTapHighlightColor: "transparent",
+}}
+```
+
+And now it looks great!
+
+Let's try it on the device and compare to the calculator.
