@@ -37,7 +37,6 @@ function Button({ onClick, children }) {
   let { buttonProps } = useButton(
     {
       onPressStart: () => {
-        console.log("onPressStart");
         controls.stop();
         controls.set({ background: "#757376" });
       },
